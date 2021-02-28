@@ -12,24 +12,17 @@ function entryId2Suffix(entryId) {
   }
 }
 
-chrome.contextMenus.create({
-  id: "parent",
-  contexts: ["selection"],
-  title: "What's the Meaning of %s?"
-});
-
-function createChildContextMenu(entryId) {
+function createContextMenu(entryId) {
   var suffix = entryId2Suffix(entryId);
   chrome.contextMenus.create({
     id: entryId,
-    parentId: "parent",
     contexts: ["selection"],
-    title: "「%s　" + suffix + "」　を検索",
+    title: "Googleで「%s　" + suffix + "」を検索",
   }); 
 }
 
-createChildContextMenu(TOHA_ENTRY_ID);
-createChildContextMenu(IMI_ENTRY_ID);
+createContextMenu(TOHA_ENTRY_ID);
+createContextMenu(IMI_ENTRY_ID);
 
 function search4(selectionText, suffix) {
   chrome.tabs.create({
