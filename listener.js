@@ -26,4 +26,4 @@ function search4(append, info, tab) {
     url: 'https://www.google.com/search?q=' + info.selectionText + '+' + append,
     active: true
   }, (tab) => { });
-});
+}
