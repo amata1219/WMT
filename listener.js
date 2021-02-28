@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener(function() {
     id: 'parent',
     type: 'normal',
     contexts: ['selection'],
-    title: 'What\'s the meaning of this?'
+    title: 'What\'s the Meaning of This?'
   });
   
   chrome.contextMenus.create({
