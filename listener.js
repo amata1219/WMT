@@ -9,33 +9,21 @@ chrome.runtime.onInstalled.addListener(function() {
   chrome.contextMenus.create({
     id: 'toha',
     parentId: 'parent',
-    title: 'とは検索'
+    title: 'とは検索',
+    onclick: search4('とは')
   });
   
   chrome.contextMenus.create({
     id: 'imi',
     parentId: 'parent',
-    title: '意味検索'
+    title: '意味検索',
+    onclick: search4('意味')
   });
 });
 
-chrome.contextMenus.onClicked.addListener(function(item) {
-  var append;
-  switch (item) {
-    case 'toha':
-      append = 'とは';
-      break;
-    case 'imi':
-      append = '意味';
-      break;
-    default:
-      break;
-  }
-  
-  console.log(item);
-  
+function search4(append, info, tab) {
   chrome.tabs.create({
-    url: 'https://www.google.com/search?q=' + item + '+' + append,
+    url: 'https://www.google.com/search?q=' + info.selectionText + '+' + append,
     active: true
   }, (tab) => { });
 });
