@@ -3,27 +3,30 @@ chrome.runtime.onInstalled.addListener(function() {
     id: 'parent',
     type: 'normal',
     contexts: ['selection'],
-    title: 'What\'s the Meaning of This?'
+    title: 'What\'s the Meaning of %s?'
   });
   
   chrome.contextMenus.create({
     id: 'toha',
     parentId: 'parent',
-    title: 'とは検索',
-    onclick: search4('とは')
+    title: '「%s とは」を検索',
+    onclick: function(info, tab) {
+      search4(info.selectionText, 'とは');
+    }
   });
   
   chrome.contextMenus.create({
     id: 'imi',
     parentId: 'parent',
-    title: '意味検索',
-    onclick: search4('意味')
+    title: '「%s 意味」を検索',
+    onclick: function(info, tab) {
+      search4(info.selectionText, '意味');
+    }
   });
 });
 
-function search4(append, info, tab) {
+function search4(selectionText, append) {
   chrome.tabs.create({
-    url: 'https://www.google.com/search?q=' + info.selectionText + '+' + append,
-    active: true
-  }, (tab) => { });
+    url: 'https://www.google.com/search?q=' + selectionText + '+' + append
+  });
 }
