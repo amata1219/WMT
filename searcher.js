@@ -23,7 +23,7 @@ function createChildContextMenu(entryId) {
   chrome.contextMenus.create({
     id: entryId,
     parentId: "parent",
-    title: "「%s " + suffix "」を検索",
+    title: "「%s " + suffix + "」を検索",
   }); 
 }
 
