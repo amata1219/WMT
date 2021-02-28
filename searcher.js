@@ -14,7 +14,6 @@ function entryId2Suffix(entryId) {
 
 chrome.contextMenus.create({
   id: "parent",
-  type "normal",
   contexts: ["selection"],
   title: "What's the Meaning of %s?"
 });
