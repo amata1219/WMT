@@ -9,10 +9,8 @@
     "tabs"
   ],
   
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["searcher.js"]
-    }
-  ]
+  "background": {
+    "scripts": ["searcher.js"]
+    "persistent": false
+  }
 }
