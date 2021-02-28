@@ -33,7 +33,7 @@ chrome.contextMenus.onClicked.addListener(function(item) {
   }
   
   chrome.tabs.create({
-    item + ' '+ append,
+    url: item + ' '+ append,
     active: true
   }, (tab) => { });
 });
