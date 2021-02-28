@@ -10,7 +10,7 @@
   ],
   
   "background": {
-    "scripts": ["searcher.js"]
+    "scripts": ["searcher.js"],
     "persistent": false
   }
 }
