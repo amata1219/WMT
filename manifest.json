@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "What's the meaning of this?",
+  "version": "1.0.0",
+  
+  "background": {
+    "scripts": ["listener.js"]
+    "persistent": false
+  },
+  
+  "permissions": [
+    "activeTab",
+    "contextMenus"
+  ]
+}
