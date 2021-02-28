@@ -24,7 +24,7 @@ function createChildContextMenu(entryId) {
     id: entryId,
     parentId: "parent",
     contexts: ["selection"],
-    title: "「%s " + suffix + "」を検索",
+    title: "「%s　" + suffix + "」 を検索",
   }); 
 }
 
