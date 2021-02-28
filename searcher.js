@@ -4,7 +4,7 @@ const SUFFIX = "意味";
 chrome.contextMenus.create({
   id: IMI_ENTRY_ID,
   contexts: ["selection"],
-  title: "Googleで「%s　" + SUFFIX + "」を検索",
+  title: "Googleで「%s」の意味を検索する",
 }); 
 
 function search4(selectionText, suffix) {
