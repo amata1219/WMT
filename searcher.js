@@ -1,22 +1,11 @@
 const IMI_ENTRY_ID = "IMI";
+const SUFFIX = "意味";
 
-function entryId2Suffix(entryId) {
-  switch (entryId) {
-    case IMI_ENTRY_ID:
-      return "意味";
-    default:
-      return null;
-  }
-}
-
-function createContextMenu() {
-  var suffix = entryId2Suffix(IMI_ENTRY_ID);
-  chrome.contextMenus.create({
-    id: entryId,
-    contexts: ["selection"],
-    title: "Googleで「%s　" + suffix + "」を検索",
-  }); 
-}
+chrome.contextMenus.create({
+  id: IMI_ENTRY_ID,
+  contexts: ["selection"],
+  title: "Googleで「%s　" + SUFFIX + "」を検索",
+}); 
 
 function search4(selectionText, suffix) {
   chrome.tabs.create({
@@ -25,8 +14,7 @@ function search4(selectionText, suffix) {
 }
 
 function onClick(info, tab) {
-  var suffix = entryId2Suffix(info.menuItemId);
-  if (suffix != null) search4(info.selectionText, suffix);
+  if (info.menuItemId === IMI_ENTRY_ID) search4(info.selectionText, SUFFIX);
 }
 
 chrome.contextMenus.onClicked.addListener(onClick);
