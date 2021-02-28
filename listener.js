@@ -32,8 +32,10 @@ chrome.contextMenus.onClicked.addListener(function(item) {
       break;
   }
   
+  console.log(item);
+  
   chrome.tabs.create({
-    url: item + ' '+ append,
+    url: 'https://www.google.com/search?q=' + item + '+' + append,
     active: true
   }, (tab) => { });
 });
