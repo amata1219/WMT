@@ -7,7 +7,7 @@
     "activeTab",
     "contextMenus",
     "tabs"
-  ]
+  ],
   
   "content_scripts": [
     {
