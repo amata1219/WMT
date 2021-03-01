@@ -12,24 +12,6 @@ function entryId2Suffix(entryId) {
   }
 }
 
-chrome.contextMenus.create({
-  id: "parent",
-  contexts: ["selection"],
-  title: "What's the Meaning of '%s'?",
-});
-
-function createChildContextMenuWith(entryId) {
-  chrome.contextMenus.create({
-    id: entryId,
-    parentId: "parent",
-    contexts: ["selection"],
-    title: entryId2Suffix(entryId) + "検索"
-  });
-}
-
-createChildContextMenuWith(TOHA_ENTRY_ID);
-createChildContextMenuWith(IMI_ENTRY_ID);
-
 function search4(selectionText, suffix) {
   chrome.tabs.create({
     url: "https://www.google.com/search?q=" + selectionText + "+" + suffix
@@ -41,4 +23,22 @@ function onClick(info, tab) {
   if (suffix != null) search4(info.selectionText, suffix);
 }
 
-chrome.contextMenus.onClicked.addListener(onClick);
+function createChildContextMenuWith(entryId) {
+  chrome.contextMenus.create({
+    id: entryId,
+    parentId: "parent",
+    contexts: ["selection"],
+    title: entryId2Suffix(entryId) + "検索"
+  });
+}
+
+chrome.runtime.onInstalled.addListener(function() {
+  chrome.contextMenus.create({
+    id: "parent",
+    contexts: ["selection"],
+    title: "What's the Meaning of '%s'?",
+  });
+  createChildContextMenuWith(TOHA_ENTRY_ID);
+  createChildContextMenuWith(IMI_ENTRY_ID);
+  chrome.contextMenus.onClicked.addListener(onClick);
+});
