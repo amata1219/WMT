@@ -15,10 +15,10 @@ function entryId2Suffix(entryId) {
 chrome.contextMenus.create({
   id: "parent",
   contexts: ["selection"],
-  title: "What's the Meaning of %s?",
+  title: "What's the Meaning of '%s'?",
 });
 
-function createChildContextMenu(entryId) {
+function createChildContextMenuWith(entryId) {
   chrome.contextMenus.create({
     id: entryId,
     parentId: "parent",
@@ -26,6 +26,9 @@ function createChildContextMenu(entryId) {
     title: entryId2Suffix(entryId) + "検索"
   });
 }
+
+createChildContextMenuWith(TOHA_ENTRY_ID);
+createChildContextMenuWith(IMI_ENTRY_ID);
 
 function search4(selectionText, suffix) {
   chrome.tabs.create({
