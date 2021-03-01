@@ -32,13 +32,11 @@ function createChildContextMenuWith(entryId) {
   });
 }
 
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.contextMenus.create({
-    id: "parent",
-    contexts: ["selection"],
-    title: "What's the Meaning of '%s'?",
-  });
-  createChildContextMenuWith(TOHA_ENTRY_ID);
-  createChildContextMenuWith(IMI_ENTRY_ID);
-  chrome.contextMenus.onClicked.addListener(onClick);
+chrome.contextMenus.create({
+  id: "parent",
+  contexts: ["selection"],
+  title: "What's the Meaning of '%s'?",
 });
+createChildContextMenuWith(TOHA_ENTRY_ID);
+createChildContextMenuWith(IMI_ENTRY_ID);
+chrome.contextMenus.onClicked.addListener(onClick);
