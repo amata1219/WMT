@@ -1,11 +1,31 @@
+const TOHA_ENTRY_ID = "TOHA";
 const IMI_ENTRY_ID = "IMI";
-const SUFFIX = "意味";
+
+function entryId2Suffix(entryId) {
+  switch (entryId) {
+    case TOHA_ENTRY_ID:
+      return "とは";
+    case IMI_ENTRY_ID:
+      return "意味";
+    default:
+      return null;
+  }
+}
 
 chrome.contextMenus.create({
-  id: IMI_ENTRY_ID,
+  id: "parent",
   contexts: ["selection"],
-  title: "Googleで「%s」の意味を検索する",
-}); 
+  title: "What's the Meaning of %s?",
+});
+
+function createChildContextMenu(entryId) {
+  chrome.contextMenus.create({
+    id: entryId,
+    parentId: "parent",
+    contexts: ["selection"],
+    title: entryId2Suffix(entryId) + "検索"
+  });
+}
 
 function search4(selectionText, suffix) {
   chrome.tabs.create({
@@ -14,7 +34,8 @@ function search4(selectionText, suffix) {
 }
 
 function onClick(info, tab) {
-  if (info.menuItemId === IMI_ENTRY_ID) search4(info.selectionText, SUFFIX);
+  var suffix = entryId2Suffix(info.menuItemId);
+  if (suffix != null) search4(info.selectionText, suffix);
 }
 
 chrome.contextMenus.onClicked.addListener(onClick);
