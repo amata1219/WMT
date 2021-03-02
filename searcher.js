@@ -35,7 +35,7 @@ function createChildContextMenuWith(entryId) {
 chrome.contextMenus.create({
   id: "parent",
   contexts: ["selection"],
-  title: "What's the Meaning of '%s'?",
+  title: "What's the Meaning of '%s'?"
 });
 createChildContextMenuWith(TOHA_ENTRY_ID);
 createChildContextMenuWith(IMI_ENTRY_ID);
