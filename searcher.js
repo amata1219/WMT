@@ -22,7 +22,7 @@ function onClick(info, tab) {
   
   if (suffix === HURIGANA_ENTRY_ID) {
     chrome.tabs.create({
-      url: "https://furigana.info/w/" + selectionText
+      url: "https://furigana.info/w/" + info.selectionText
     }); 
   } else {
     chrome.tabs.create({
