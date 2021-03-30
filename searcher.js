@@ -1,5 +1,6 @@
 const TOHA_ENTRY_ID = "TOHA";
 const IMI_ENTRY_ID = "IMI";
+const HURIGANA_ENTRY_ID = "HURIGANA";
 
 function entryId2Suffix(entryId) {
   switch (entryId) {
@@ -7,20 +8,27 @@ function entryId2Suffix(entryId) {
       return "とは";
     case IMI_ENTRY_ID:
       return "意味";
+    case HURIGANA_ENTRY_ID:
+      return "ふりがな";
     default:
       return null;
   }
 }
 
-function search4(selectionText, suffix) {
-  chrome.tabs.create({
-    url: "https://www.google.com/search?q=" + selectionText + "+" + suffix
-  }); 
-}
-
 function onClick(info, tab) {
   var suffix = entryId2Suffix(info.menuItemId);
-  if (suffix != null) search4(info.selectionText, suffix);
+  
+  if (suffix == null) return;
+  
+  if (suffix === HURIGANA_ENTRY_ID) {
+    chrome.tabs.create({
+      url: "https://furigana.info/w/" + selectionText
+    }); 
+  } else {
+    chrome.tabs.create({
+      url: "https://www.google.com/search?q=" + info.selectionText + "+" + suffix
+    });
+  }
 }
 
 function createChildContextMenuWith(entryId) {
@@ -39,4 +47,5 @@ chrome.contextMenus.create({
 });
 createChildContextMenuWith(TOHA_ENTRY_ID);
 createChildContextMenuWith(IMI_ENTRY_ID);
+createChildContextMenuWith(HURIGANA_ENTRY_ID);
 chrome.contextMenus.onClicked.addListener(onClick);
