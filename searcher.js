@@ -8,6 +8,8 @@ function entryId2Suffix(entryId) {
       return "とは";
     case IMI_ENTRY_ID:
       return "意味";
+    case TOHA_ENTRY_ID:
+      return "ふりがな";
     default:
       return null;
   }
@@ -15,6 +17,7 @@ function entryId2Suffix(entryId) {
 
 function onClick(info, tab) {
   var suffix = entryId2Suffix(info.menuItemId);
+  if (suffix == null) return;
   
   if (info.menuItemId === HURIGANA_ENTRY_ID) {
     chrome.tabs.create({
