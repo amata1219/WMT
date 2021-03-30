@@ -8,7 +8,7 @@ function entryId2Suffix(entryId) {
       return "とは";
     case IMI_ENTRY_ID:
       return "意味";
-    case TOHA_ENTRY_ID:
+    case HURIGANA_ENTRY_ID:
       return "ふりがな";
     default:
       return null;
